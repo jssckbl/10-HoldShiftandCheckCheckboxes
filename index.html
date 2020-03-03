@@ -99,8 +99,25 @@
   const checkboxes = document.querySelectorAll('.inbox input[type = "checkbox"]');
   console.log(checkboxes);
 
+  let lastChecked;
+
   function handleCheck(e) {
+    let inBetween = false;
+    // check if shift was pressed
+    // AND make sure they are checking the box (not removing the check from the box)
+    if (e.shiftKey && this.checked){
+      // loop through ever single box and use variable called "inBetween" 
+      checkboxes.forEach(checkbox => {
+        console.log(checkbox); 
+        if(checkbox === this || checkbox === lastChecked) {
+          // normally we would do true but due to functionality we want it to be the opposite of itself
+          inBetween = !inBetween;
+          console.log('starting to check them inBetween');
+        }
+      })
+    }
     console.log(e);
+    lastChecked = this;
   }
 
   // take checkboxes and loop over each one
